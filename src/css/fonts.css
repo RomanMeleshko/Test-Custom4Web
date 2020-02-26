@@ -1,0 +1,7 @@
+@font-face {
+    font-family: Lato-Light;
+    src: url(../fonts/9625.ttf);
+}
+* {
+    font-family: Lato-Light;
+}

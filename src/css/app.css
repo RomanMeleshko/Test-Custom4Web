@@ -1,0 +1,11 @@
+/* Header style */
+@import "header.css";
+
+/* Footer style */
+@import "footer.css";
+
+/* Common style */
+@import "common.css";
+
+/* Fonts */
+@import "fonts.css";

@@ -1,0 +1,53 @@
+.table-block__text-field {
+    background: #e3ffa9;
+    border-radius: 10px;
+}
+
+.table-block__table {
+    background: #e3e1ee;
+    border-radius: 10px;
+}
+
+.table-block__input {
+
+}
+td, th {
+    padding: 10px;
+}
+
+/* preloader */
+.container-loader {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(200, 214, 219, 0.7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    z-index: 99;
+
+}
+.circle {
+    top: 40%;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    border: 5px solid green;
+    border-top: 5px solid white;
+    margin-left: auto;
+    margin-right: auto;
+    animation: animate 1s infinite linear;
+
+}
+
+@keyframes animate {
+0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+
+}
