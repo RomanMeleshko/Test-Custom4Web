@@ -19,6 +19,10 @@ window.onload = function() {
 
                 setTableData( data );
 
+                pagination();
+
+               // showRows();
+
             }
         }
 
@@ -190,7 +194,7 @@ window.onload = function() {
 
         text_field.addEventListener("keyup", function(event) {
 
-           sortString(text_field.value);
+           sortString(text_field.value, event.code);
 
         });
 
@@ -198,32 +202,100 @@ window.onload = function() {
 
     sortTextField();
 
-    function sortString(text) {
+
+    function sortString(text, code) {
 
         let table = document.querySelector("table");
         let tbody = table.querySelector("tbody");
 
         let arr_rows = [].slice.call(tbody.rows);
 
-        text = text.toLowerCase();
+        var result = [];
 
-        arr_rows.sort(function(a, b) {
+        if(code == "Backspace") {
 
-            var lower = a.cells[1].innerHTML.toLowerCase();
+                removeRows(arr_rows, tbody);
 
-           if(lower.indexOf(text) == 0)  return -1;
+                setTableData(data);
 
-        });
+            return;
 
-        arr_rows.map(function(elem) {
-            tbody.appendChild(elem);
+        }
+
+        for(var i = 0; i < arr_rows.length; i++) {
+
+            var str = arr_rows[i].cells[1].innerHTML.toLowerCase();
+
+            if(str.indexOf(text) == 0) {
+
+                result.push(arr_rows[i]);
+
+            }
+
+        }
+
+        console.log(table.clientHeight);
+
+        removeRows(arr_rows, tbody);
+
+        result.map(function(elem) {
+            tbody.append(elem);
         });
 
     }
 
 
+    function pagination() {
 
+        let pagination = document.getElementsByClassName("pagination")[0];
 
+        let table_block = document.getElementsByClassName("table-block__table")[0];
+
+        let table = document.getElementsByClassName("table")[0];
+
+        table_block.style.height = table.clientHeight / 10 + "px";
+
+        let count = 0;
+
+        let create_li;
+
+        for(var i = 0; i < 2; i++) {
+
+            create_li = document.createElement("li");
+
+            if(i == 0) {
+
+                create_li.innerText = "Up";
+
+                create_li.addEventListener("click", function(){
+
+                    if(count == 0 || count > 0) return;
+
+                    table.style.marginTop = (count += table.clientHeight / 10 - 5) + "px";
+
+                });
+            }
+
+            if(i == 1) {
+
+                create_li.innerText = "Down";
+
+                create_li.addEventListener("click", function(){
+
+                     if(count <= -table.clientHeight) return;
+
+                     table.style.marginTop = (count -= table.clientHeight / 10 - 5) + "px";
+
+                });
+
+            }
+
+            create_li.classList.add("item");
+
+            pagination.appendChild(create_li);
+        }
+
+    }
 
 
 
